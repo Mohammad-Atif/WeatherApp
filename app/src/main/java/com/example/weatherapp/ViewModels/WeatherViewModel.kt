@@ -4,9 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.Repository.WeatherRepository
-import com.example.weatherapp.models.WeatherResponse
+import com.example.weatherapp.models.WheatherReport
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
-import retrofit2.Call
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 import rx.Single
 
@@ -22,14 +25,21 @@ class WeatherViewModel(
     val weather_rep: WeatherRepository
 ):ViewModel() {
 
-    val current_weather:MutableLiveData<Single<Response<WeatherResponse>>> = MutableLiveData()
-
-    fun getweatherbycity(city:String="Lucknow")= viewModelScope.launch {
-
-        val weather=weather_rep.getweatherbycityname(city)
-            //current_weather.postValue(weather)
+    val current_weather:MutableLiveData<Int> = MutableLiveData()
 
 
+    fun getweatherbycity(city:String="Lucknow"){
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val res=weather_rep.getweatherbycityname(city)
+            if(res.isSuccessful)
+            {
+                val currenttemp= res.body()?.current?.temperature
+                withContext(Main){
+                    current_weather.postValue(currenttemp)
+                }
+            }
+
+        }
     }
-
 }

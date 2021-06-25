@@ -1,12 +1,12 @@
 package com.example.weatherapp.api
 
-import com.example.weatherapp.models.WeatherResponse
+import com.example.weatherapp.BuildConfig
+import com.example.weatherapp.models.WheatherReport
 import com.example.weatherapp.util.Constants.Companion.API_KEY
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
-import rx.Single
 
 /*
   This is the api interface which contains the function to get the data from the api
@@ -16,12 +16,13 @@ import rx.Single
  */
 interface WeatherApi {
 
-    @GET("data/2.5/weather")
+    @GET("current")
     suspend fun getweatherbycity(
-        @Query("q")
-        cityname: String="London",
-        @Query("appid")
+        @Query("query")
+        city_name: String,
+        @Query("access_key")
         api_key: String = API_KEY
-    ): Single<Response<WeatherResponse>>
 
+
+    ): Response<WheatherReport>
 }

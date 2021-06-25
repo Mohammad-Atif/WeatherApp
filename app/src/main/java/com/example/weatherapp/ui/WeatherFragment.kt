@@ -36,7 +36,7 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
         }
 
         viewModel.current_weather.observe(viewLifecycleOwner, Observer {
-            //current_Degree_text.text=viewModel.current_weather.value?.main?.temp.toString()
+            current_Degree_text.text=viewModel.current_weather.value.toString()
         })
 
     }
