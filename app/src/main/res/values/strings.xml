@@ -8,4 +8,7 @@
     <string name="precip">Precip</string>
     <string name="pressure">Pressure</string>
     <string name="_30_c">30 C</string>
+    <string name="search_city">Search City</string>
+    <string name="this_logo_is_for_weather">This logo is for Weather</string>
+    <string name="this_icon_is_for_search">This icon is for search</string>
 </resources>

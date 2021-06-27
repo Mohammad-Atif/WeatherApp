@@ -42,7 +42,7 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
 
 
 
-        viewModel.getweatherbycity("London")
+        viewModel.getweatherbycity("Lucknow")
 
 
 
@@ -50,7 +50,7 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
             val picurl= viewModel.current_weather.value?.current?.weather_icons?.get(0).toString()
             Glide.with(this).load(picurl).into(binding.whetherlogo)
             val temp=viewModel.current_weather.value?.current?.temperature
-            val tempstring="$temp °C"
+            val tempstring="$temp°C"
             binding.currentDegreeText.text= tempstring
             val windspeed=viewModel.current_weather.value?.current?.wind_speed
             val precipation=viewModel.current_weather.value?.current?.precip
@@ -61,8 +61,22 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
             binding.txtWind.text=windspeedString
             binding.txtPrecip.text=PrecipString
             binding.txtpressure.text=PressureString
+            val cityname=viewModel.current_weather.value?.location?.name.toString()
+            val countryname=viewModel.current_weather.value?.location?.country.toString()
+            val txtcityString="$cityname,$countryname"
+            binding.txtCity.text = txtcityString
+            binding.txtDescription.text= viewModel.current_weather.value?.current?.weather_descriptions?.get(0)
+                .toString()
 
         })
+
+        binding.btnSearch.setOnClickListener {
+            if(!binding.SearchCity.text.isEmpty())
+            {
+                viewModel.getweatherbycity(binding.SearchCity.text.toString())
+                binding.SearchCity.text.clear()
+            }
+        }
 
     }
 
