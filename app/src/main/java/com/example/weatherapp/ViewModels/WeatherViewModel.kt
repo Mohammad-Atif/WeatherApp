@@ -25,7 +25,7 @@ class WeatherViewModel(
     val weather_rep: WeatherRepository
 ):ViewModel() {
 
-    val current_weather:MutableLiveData<Int> = MutableLiveData()
+    val current_weather:MutableLiveData<WheatherReport> = MutableLiveData()
 
 
     fun getweatherbycity(city:String="Lucknow"){
@@ -34,7 +34,7 @@ class WeatherViewModel(
             val res=weather_rep.getweatherbycityname(city)
             if(res.isSuccessful)
             {
-                val currenttemp= res.body()?.current?.temperature
+                val currenttemp= res.body()
                 withContext(Main){
                     current_weather.postValue(currenttemp)
                 }
