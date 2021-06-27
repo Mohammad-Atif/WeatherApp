@@ -42,20 +42,25 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
 
 
 
-        viewModel.getweatherbycity("Lucknow")
+        viewModel.getweatherbycity("London")
 
 
 
         viewModel.current_weather.observe(viewLifecycleOwner, Observer {
             val picurl= viewModel.current_weather.value?.current?.weather_icons?.get(0).toString()
             Glide.with(this).load(picurl).into(binding.whetherlogo)
-            binding.currentDegreeText.text= viewModel.current_weather.value?.current?.temperature.toString()
+            val temp=viewModel.current_weather.value?.current?.temperature
+            val tempstring="$temp °C"
+            binding.currentDegreeText.text= tempstring
             val windspeed=viewModel.current_weather.value?.current?.wind_speed
             val precipation=viewModel.current_weather.value?.current?.precip
             val pressure=viewModel.current_weather.value?.current?.pressure
-            binding.txtWind.text="Wind: $windspeed kmph"
-            binding.txtPrecip.text="Precip: $precipation mm"
-            binding.txtpressure.text="Pressure: $pressure mb"
+            val windspeedString="Wind: $windspeed kmph"
+            val PrecipString="Precip: $precipation mm"
+            val PressureString="Pressure: $pressure mb"
+            binding.txtWind.text=windspeedString
+            binding.txtPrecip.text=PrecipString
+            binding.txtpressure.text=PressureString
 
         })
 
