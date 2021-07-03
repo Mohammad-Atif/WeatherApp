@@ -5,111 +5,30 @@
     android:id="@+id/constrain_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#332940"
+    android:background="#F0F0F0"
     tools:context=".ui.WeatherFragment">
 
 
-    <ImageView
-        android:id="@+id/whetherlogo"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:contentDescription="@string/this_logo_is_for_weather"
-        android:paddingTop="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.262"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.22000003" />
-
-    <TextView
-        android:id="@+id/current_Degree_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/open_sans_semibold"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="@+id/whetherlogo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/whetherlogo"
-        app:layout_constraintTop_toTopOf="@+id/whetherlogo"
-        app:layout_constraintVertical_bias="0.24000001" />
-
-    <TextView
-        android:id="@+id/txtWind"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/open_sans"
-        android:text="@string/wind"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/whetherlogo"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/whetherlogo"
-        app:layout_constraintTop_toBottomOf="@+id/whetherlogo" />
-
-    <TextView
-        android:id="@+id/txtPrecip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/open_sans"
-        android:text="@string/precip"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/whetherlogo"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/whetherlogo"
-        app:layout_constraintTop_toBottomOf="@+id/txtWind" />
-
-    <TextView
-        android:id="@+id/txtpressure"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:fontFamily="@font/open_sans"
-        android:text="@string/pressure"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/whetherlogo"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/whetherlogo"
-        app:layout_constraintTop_toBottomOf="@+id/txtPrecip" />
-
-    <TextView
-        android:id="@+id/txtCity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/open_sans_semibold"
-        android:textColor="#FFFFFF"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="@+id/current_Degree_text"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/whetherlogo"
-        app:layout_constraintTop_toBottomOf="@+id/txtpressure" />
-
     <EditText
         android:id="@+id/SearchCity"
-        android:layout_width="221dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:background="@drawable/border"
         android:ems="10"
         android:hint="@string/search_city"
         android:inputType="textPersonName"
-        android:paddingLeft="5dp"
+
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#FFFFFF"
-        android:textColorHighlight="#FFFFFF"
-        android:textColorHint="#97FFFFFF"
+        android:textColor="#000000"
+        android:textColorHighlight="#000000"
+        android:textColorHint="#5E5757"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCity"
+        app:layout_constraintEnd_toEndOf="@+id/cardviewWhether"
+        app:layout_constraintHorizontal_bias="0.36"
+        app:layout_constraintStart_toStartOf="@+id/cardviewWhether"
+        app:layout_constraintTop_toBottomOf="@+id/cardviewWhether"
         app:layout_constraintVertical_bias="0.28" />
 
     <ImageView
@@ -124,24 +43,129 @@
         app:layout_constraintStart_toEndOf="@+id/SearchCity"
         app:layout_constraintTop_toTopOf="@+id/SearchCity" />
 
-    <TextView
-        android:id="@+id/txtDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:fontFamily="@font/open_sans"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/whetherlogo"
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardviewWhether"
+        android:layout_width="340dp"
+        android:layout_height="340dp"
+        android:background="@drawable/rounded_corner"
+        app:cardBackgroundColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/whetherlogo"
-        app:layout_constraintTop_toBottomOf="@+id/current_Degree_text"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.26">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ConstrainCardLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rounded_corner">
+
+            <ImageView
+                android:id="@+id/whetherlogo"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:contentDescription="@string/this_logo_is_for_weather"
+                android:paddingTop="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.122"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.120000005" />
+
+            <TextView
+                android:id="@+id/txtDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:fontFamily="@font/open_sans"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/whetherlogo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/whetherlogo"
+                app:layout_constraintTop_toBottomOf="@+id/current_Degree_text"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/current_Degree_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans_semibold"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="@+id/whetherlogo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/whetherlogo"
+                app:layout_constraintTop_toTopOf="@+id/whetherlogo"
+                app:layout_constraintVertical_bias="0.24000001" />
+
+            <TextView
+                android:id="@+id/txtWind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/wind"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/whetherlogo"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/whetherlogo"
+                app:layout_constraintTop_toBottomOf="@+id/whetherlogo" />
+
+            <TextView
+                android:id="@+id/txtPrecip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/precip"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/whetherlogo"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/whetherlogo"
+                app:layout_constraintTop_toBottomOf="@+id/txtWind" />
+
+            <TextView
+                android:id="@+id/txtpressure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/pressure"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/whetherlogo"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/whetherlogo"
+                app:layout_constraintTop_toBottomOf="@+id/txtPrecip" />
+
+            <TextView
+                android:id="@+id/txtCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans_semibold"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtpressure" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
