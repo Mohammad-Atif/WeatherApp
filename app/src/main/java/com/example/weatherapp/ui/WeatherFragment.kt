@@ -47,6 +47,10 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
 
         viewModel= ViewModelProviders.of(this,viewmodelprovider).get(WeatherViewModel::class.java)
 
+        /*
+        In order to use location we have to ask the user for the location permission acces
+        If android version is less than marshmellow we didnt need to ask for it
+         */
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (viewModel.checkPermission(requireContext().applicationContext,permissions)) {
                 viewModel.getCurrentLocation(requireContext().applicationContext)

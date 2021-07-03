@@ -53,6 +53,7 @@ class WeatherViewModel(
         }
     }
 
+
     fun checkPermission(context: Context,permiss: String): Boolean {
         var allSuccess = true
         if (checkCallingOrSelfPermission(context,permiss) == PERMISSION_DENIED)
@@ -61,7 +62,11 @@ class WeatherViewModel(
     }
 
 
-
+    /*
+    This function will first get the location as lattitude and longitude then getCityFromLocation function
+    will reverse geocode and find the city name from lattitude and longitude
+    Here we have to Supress the mission permission warning because we get the permission on the runtime of the app
+     */
     @SuppressLint("MissingPermission")
     fun getCurrentLocation(context: Context){
         locationManager = context.getSystemService(LOCATION_SERVICE) as LocationManager
