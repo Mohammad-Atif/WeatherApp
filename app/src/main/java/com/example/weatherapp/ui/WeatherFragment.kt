@@ -1,10 +1,16 @@
 package com.example.weatherapp.ui
 
+import android.Manifest
+import android.app.Activity
+import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -16,13 +22,15 @@ import com.example.weatherapp.ViewModels.WeatherViewModel
 import com.example.weatherapp.ViewModels.WeatherViewModelProvider
 import com.example.weatherapp.databinding.FragmentWeatherBinding
 import kotlinx.android.synthetic.main.fragment_weather.*
+import java.security.AccessController.checkPermission
 
 
 class WeatherFragment : Fragment(R.layout.fragment_weather) {
 
     lateinit var viewModel: WeatherViewModel
     private lateinit var binding: FragmentWeatherBinding
-
+    private var PERMISSION_REQUEST = 10
+    private var permissions= Manifest.permission.ACCESS_FINE_LOCATION
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,10 +47,20 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
 
         viewModel= ViewModelProviders.of(this,viewmodelprovider).get(WeatherViewModel::class.java)
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (viewModel.checkPermission(requireContext().applicationContext,permissions)) {
+                viewModel.getCurrentLocation(requireContext().applicationContext)
+            } else {
+                requestPermissions(arrayOf(permissions), PERMISSION_REQUEST)
+            }
+        } else {
+            viewModel.getCurrentLocation(requireContext().applicationContext)
+        }
 
 
 
-        viewModel.getweatherbycity("Lucknow")
+
+
 
 
 
@@ -78,6 +96,21 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
             }
         }
 
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if(requestCode==PERMISSION_REQUEST){
+            if(grantResults[0]==PackageManager.PERMISSION_DENIED)
+            {
+                finishAffinity(requireActivity().parent)
+            }
+        }
+        viewModel.getCurrentLocation(requireContext().applicationContext)
     }
 
 
