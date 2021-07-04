@@ -6,11 +6,59 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/fragment_controller_container"
-        />
+    <EditText
+        android:id="@+id/SearchCity"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:background="@drawable/border"
+        android:ems="10"
+        android:hint="@string/search_city"
+        android:inputType="textPersonName"
+
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#000000"
+        android:textColorHighlight="#000000"
+        android:textColorHint="#5E5757"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/cardviewWhether"
+        app:layout_constraintHorizontal_bias="0.36"
+        app:layout_constraintStart_toStartOf="@+id/cardviewWhether"
+        app:layout_constraintTop_toBottomOf="@+id/cardviewWhether"
+        app:layout_constraintVertical_bias="0.28" />
+
+    <ImageView
+        android:id="@+id/btnSearch"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:contentDescription="@string/this_icon_is_for_search"
+        android:src="@drawable/ic_searchicon"
+        app:layout_constraintBottom_toBottomOf="@+id/SearchCity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.27"
+        app:layout_constraintStart_toEndOf="@+id/SearchCity"
+        app:layout_constraintTop_toTopOf="@+id/SearchCity" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardviewWhether"
+        android:layout_width="340dp"
+        android:layout_height="340dp"
+        android:background="@drawable/rounded_corner"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.26">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fragment_controller_container"
+            />
+    </androidx.cardview.widget.CardView>
 
 
 

@@ -43,12 +43,8 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val rep=WeatherRepository()
-        val viewmodelprovider=WeatherViewModelProvider(rep)
 
-
-
-        viewModel= ViewModelProviders.of(this,viewmodelprovider).get(WeatherViewModel::class.java)
+        viewModel= (activity as MainActivity).viewModel
 
         /*
         In order to use location we have to ask the user for the location permission acces
@@ -91,15 +87,9 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
 
         })
 
-        binding.btnSearch.setOnClickListener {
-            if(!binding.SearchCity.text.isEmpty())
-            {
-                viewModel.getweatherbycity(binding.SearchCity.text.toString())
-                binding.SearchCity.text.clear()
-            }
-        }
 
-        binding.cardviewWhether.setOnTouchListener { view, motionEvent ->
+
+        binding.constrainLayout.setOnTouchListener { view, motionEvent ->
             if(motionEvent.action==MotionEvent.ACTION_DOWN)
                 x1=motionEvent.x
             if(motionEvent.action==MotionEvent.ACTION_UP)
