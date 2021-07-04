@@ -1,19 +1,16 @@
 package com.example.weatherapp.ui
 
 import android.Manifest
-import android.app.Activity
-import android.content.Context
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import android.widget.Toast
 import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.example.weatherapp.R
@@ -21,8 +18,7 @@ import com.example.weatherapp.Repository.WeatherRepository
 import com.example.weatherapp.ViewModels.WeatherViewModel
 import com.example.weatherapp.ViewModels.WeatherViewModelProvider
 import com.example.weatherapp.databinding.FragmentWeatherBinding
-import kotlinx.android.synthetic.main.fragment_weather.*
-import java.security.AccessController.checkPermission
+import kotlin.math.abs
 
 
 class WeatherFragment : Fragment(R.layout.fragment_weather) {
@@ -31,6 +27,10 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
     private lateinit var binding: FragmentWeatherBinding
     private var PERMISSION_REQUEST = 10
     private var permissions= Manifest.permission.ACCESS_FINE_LOCATION
+    private  var x1:Float = 0.0f
+    private  var x2:Float = 0.0f
+    val MIN_DISTANCE=150
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,10 +40,13 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
         return binding.root
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val rep=WeatherRepository()
         val viewmodelprovider=WeatherViewModelProvider(rep)
+
+
 
         viewModel= ViewModelProviders.of(this,viewmodelprovider).get(WeatherViewModel::class.java)
 
@@ -60,10 +63,6 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
         } else {
             viewModel.getCurrentLocation(requireContext().applicationContext)
         }
-
-
-
-
 
 
 
@@ -100,7 +99,27 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
             }
         }
 
+        binding.cardviewWhether.setOnTouchListener { view, motionEvent ->
+            if(motionEvent.action==MotionEvent.ACTION_DOWN)
+                x1=motionEvent.x
+            if(motionEvent.action==MotionEvent.ACTION_UP)
+            {
+                x2=motionEvent.x
+                val deltax=x2-x1
+                if(deltax>MIN_DISTANCE){
+                    Toast.makeText(activity,"left2right Swipe",Toast.LENGTH_SHORT).show()
+                }
+                else if(abs(deltax)>MIN_DISTANCE){
+                    Toast.makeText(activity,"right2left Swipe",Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            return@setOnTouchListener true
+        }
+
+
     }
+
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -116,6 +135,9 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
         }
         viewModel.getCurrentLocation(requireContext().applicationContext)
     }
+
+
+
 
 
 }

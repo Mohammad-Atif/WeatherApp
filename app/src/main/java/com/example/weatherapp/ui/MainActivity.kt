@@ -3,6 +3,7 @@ package com.example.weatherapp.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MotionEvent
 import com.example.weatherapp.R
 
 
@@ -15,4 +16,6 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().replace(R.id.fragment_controller_container,frag).commit()
 
     }
+
+
 }
