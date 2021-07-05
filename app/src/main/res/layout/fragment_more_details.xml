@@ -17,10 +17,10 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.187"
+        app:layout_constraintHorizontal_bias="0.189"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.11" />
+        app:layout_constraintVertical_bias="0.20" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -87,7 +87,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/Visib"
         app:layout_constraintEnd_toEndOf="@+id/FeelsLikeTxt"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.474"
         app:layout_constraintStart_toStartOf="@+id/FeelsLikeTxt"
         app:layout_constraintTop_toTopOf="@+id/Visib"
         app:layout_constraintVertical_bias="0.0" />
