@@ -1,12 +1,17 @@
 package com.example.weatherapp.ui
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProviders
 import com.example.weatherapp.R
 import com.example.weatherapp.Repository.WeatherRepository
@@ -23,6 +28,8 @@ class MainActivity : AppCompatActivity() {
     private  var x2:Float = 0.0f
     val MIN_DISTANCE=150
     var indetailFrag=false
+    private var PERMISSION_REQUEST = 10
+    private var permissions= Manifest.permission.ACCESS_FINE_LOCATION
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +40,21 @@ class MainActivity : AppCompatActivity() {
         viewModel= ViewModelProviders.of(this,viewmodelprovider).get(WeatherViewModel::class.java)
         val frag=WeatherFragment()
         supportFragmentManager.beginTransaction().replace(R.id.fragment_controller_container,frag).commit()
+
+        /*
+       In order to use location we have to ask the user for the location permission acces
+       If android version is less than marshmellow we didnt need to ask for it
+        */
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (viewModel.checkPermission(this,permissions)) {
+                viewModel.getCurrentLocation(this)
+            } else {
+                requestPermissions(arrayOf(permissions), PERMISSION_REQUEST)
+            }
+        } else {
+            viewModel.getCurrentLocation(this)
+        }
+
 
 
         binding.btnSearch.setOnClickListener {
@@ -73,6 +95,21 @@ class MainActivity : AppCompatActivity() {
 
             return@setOnTouchListener true
         }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if(requestCode==PERMISSION_REQUEST){
+            if(grantResults[0]== PackageManager.PERMISSION_DENIED)
+            {
+                ActivityCompat.finishAffinity(this)
+            }
+        }
+        viewModel.getCurrentLocation(this)
     }
 
 

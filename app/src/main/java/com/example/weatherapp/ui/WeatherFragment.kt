@@ -46,19 +46,6 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
 
         viewModel= (activity as MainActivity).viewModel
 
-        /*
-        In order to use location we have to ask the user for the location permission acces
-        If android version is less than marshmellow we didnt need to ask for it
-         */
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (viewModel.checkPermission(requireContext().applicationContext,permissions)) {
-                viewModel.getCurrentLocation(requireContext().applicationContext)
-            } else {
-                requestPermissions(arrayOf(permissions), PERMISSION_REQUEST)
-            }
-        } else {
-            viewModel.getCurrentLocation(requireContext().applicationContext)
-        }
 
 
 
@@ -95,20 +82,7 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
     }
 
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode==PERMISSION_REQUEST){
-            if(grantResults[0]==PackageManager.PERMISSION_DENIED)
-            {
-                finishAffinity(requireActivity().parent)
-            }
-        }
-        viewModel.getCurrentLocation(requireContext().applicationContext)
-    }
+
 
 
 
