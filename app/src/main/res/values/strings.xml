@@ -11,4 +11,9 @@
     <string name="search_city">Search City</string>
     <string name="this_logo_is_for_weather">This logo is for Weather</string>
     <string name="this_icon_is_for_search">This icon is for search</string>
+    <string name="feels_like">Feels Like</string>
+    <string name="wind_degree">Wind Degree</string>
+    <string name="humidity">Humidity</string>
+    <string name="uv_index">UV Index</string>
+    <string name="visibility">Visibility</string>
 </resources>

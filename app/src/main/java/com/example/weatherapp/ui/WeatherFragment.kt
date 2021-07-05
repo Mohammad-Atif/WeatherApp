@@ -89,23 +89,7 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
 
 
 
-        binding.constrainLayout.setOnTouchListener { view, motionEvent ->
-            if(motionEvent.action==MotionEvent.ACTION_DOWN)
-                x1=motionEvent.x
-            if(motionEvent.action==MotionEvent.ACTION_UP)
-            {
-                x2=motionEvent.x
-                val deltax=x2-x1
-                if(deltax>MIN_DISTANCE){
-                    Toast.makeText(activity,"left2right Swipe",Toast.LENGTH_SHORT).show()
-                }
-                else if(abs(deltax)>MIN_DISTANCE){
-                    Toast.makeText(activity,"right2left Swipe",Toast.LENGTH_SHORT).show()
-                }
-            }
 
-            return@setOnTouchListener true
-        }
 
 
     }
