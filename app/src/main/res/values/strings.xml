@@ -16,4 +16,6 @@
     <string name="humidity">Humidity</string>
     <string name="uv_index">UV Index</string>
     <string name="visibility">Visibility</string>
+    <string name="belowcolored">BelowColored</string>
+    <string name="belowstroke">BelowStroke</string>
 </resources>

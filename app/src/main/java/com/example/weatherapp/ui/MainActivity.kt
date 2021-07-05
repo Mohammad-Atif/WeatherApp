@@ -76,6 +76,8 @@ class MainActivity : AppCompatActivity() {
                     if(indetailFrag)
                     {
                         Log.d("swipe","left2right")
+                        binding.forMaintab.setImageResource(R.drawable.ic_panorama_fish_eye_black_24dp)
+                        binding.forOtherTab.setImageResource(R.drawable.strokecircle)
                         indetailFrag=false
                         supportFragmentManager.beginTransaction().replace(R.id.fragment_controller_container,frag).commit()
                     }
@@ -85,6 +87,9 @@ class MainActivity : AppCompatActivity() {
                     //Toast.makeText(this,"right2left Swipe",Toast.LENGTH_SHORT).show()
                     if(!indetailFrag) {
                         Log.d("swipe","right2left")
+                        binding.forMaintab.setImageResource(R.drawable.strokecircle)
+                        binding.forOtherTab.setImageResource(R.drawable.ic_panorama_fish_eye_black_24dp)
+
                         indetailFrag=true
                         val moreDetailsFrag = MoreDetailsFragment()
                         supportFragmentManager.beginTransaction()
