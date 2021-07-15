@@ -53,6 +53,22 @@ class WeatherViewModel(
         }
     }
 
+    fun getInitialWeather(city:String="Lucknow"){
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val res=weather_rep.getweatherbycityname(city)
+            if(res.isSuccessful)
+            {
+                val currenttemp= res.body()
+                withContext(Main){
+                    if(current_weather.value==null)
+                    current_weather.postValue(currenttemp)
+                }
+            }
+
+        }
+    }
+
 
     fun checkPermission(context: Context,permiss: String): Boolean {
         var allSuccess = true
@@ -101,6 +117,6 @@ class WeatherViewModel(
         }
         val currentcityname=cityName.subSequence(firstcomma,secondcomma).toString()
         Log.d("OnlycityFromLocation","$currentcityname")
-        getweatherbycity(cityName)
+        getInitialWeather(cityName)
     }
 }
